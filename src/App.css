@@ -1,0 +1,456 @@
+@import url("https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 100vh;
+  background: url("./assets/background.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #db8e1e;
+  overflow-x: hidden;
+}
+
+/* Background section with parallax effect */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-image: url("./assets/recipe.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  transform: translateY(0);
+  transition: transform 0.2s ease-out;
+}
+
+.content {
+  height: 200vh;
+  position: relative;
+  z-index: 1;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 20px 20px;
+  top: 0;
+  z-index: 1000;
+  position: sticky;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: "Eczar", serif;
+  font-size: 4.5rem;
+  letter-spacing: 3px;
+}
+
+.sub-title {
+  font-family: "Lobster Two", sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search input {
+  padding: 10px 40px 10px 15px;
+  font-size: 1rem;
+  height: 50px;
+  border-radius: 15px;
+  border: 1px solid #db8e1e;
+  outline: none;
+  background-color: transparent;
+  opacity: 0.3;
+}
+
+.search input:focus {
+  opacity: 1;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  font-size: 1.4rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.nav-offcanvas {
+  height: 100vh;
+  width: 100vw;
+}
+
+.nav-title {
+  background-color: black;
+}
+
+.nav-title h2 {
+  font-family: "Lobster Two", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #db8e1e;
+  border-bottom: 1px solid #db8e1e;
+}
+
+.nav a {
+  color: rgb(241, 224, 193);
+  font-family: "Lobster Two", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+}
+
+.nav a:hover {
+  color: #db8e1e;
+  border-bottom: 1px solid #db8e1e;
+}
+
+.nav-links {
+  color: #db8e1e;
+  background-color: black;
+  font-family: "Lobster Two", sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+}
+
+.nav-links a {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 23%;
+  height: 1px;
+  bottom: 5px;
+  left: 0;
+  background-color: #db8e1e;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.nav-links a:hover::after {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.nav-open-btn .navbar-toggler-icon {
+  background-color: #db8e1e;
+  padding: 23px;
+}
+
+.btn-close-icon {
+  position: absolute;
+  color: #db8e1e;
+  right: 5%;
+  top: 20px;
+  opacity: 1;
+  font-size: 35px;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-container input {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #db8e1e;
+  color: #db8e1e;
+  position: relative;
+  padding-left: 40px;
+  font-size: 1.2rem;
+  font-family: "Eczar", serif;
+  width: 100%;
+  height: 40px;
+  opacity: 0.3;
+}
+
+.nav-search::placeholder {
+  color: rgb(241, 224, 193);
+}
+
+.search-container input:focus {
+  opacity: 1;
+  outline: 1px #db8e1e;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #db8e1e;
+  font-size: 1.4rem;
+}
+/* *******intro******* */
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 5rem;
+  gap: 20px;
+}
+
+.intro-img {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  opacity: 1;
+  margin-top: -190px;
+}
+
+.intro p {
+  position: absolute;
+  background-color: #db8e1e;
+  max-width: 700px;
+  z-index: 1;
+  top: 28%;
+  padding: 1.5rem 1.5rem;
+  color: black;
+  font-family: "Eczar", serif;
+  font-size: 1rem;
+  line-height: 2.2rem;
+  text-align: start;
+  letter-spacing: 2px;
+}
+
+.sub-intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8rem;
+  padding: 3.5rem;
+}
+
+.sub-intro-icon {
+  position: absolute;
+  font-size: 36px;
+  /* color: rgb(241, 224, 193); */
+  color: #db8e1e;
+  transform: rotate(-45deg);
+}
+
+.sub-intro h2 {
+  color: rgb(241, 224, 193);
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  line-height: 7rem;
+  margin-bottom: -50px;
+  font-family: "Lobster Two", sans-serif;
+}
+
+.details {
+  margin-top: 25px;
+  padding: 70px 20px 10px;
+  background-color: black;
+  color: #db8e1e;
+}
+
+.error-msg {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 10rem auto -4rem;
+}
+
+.error-msg p {
+  font-size: 1.1rem;
+  font-family: "Eczar", serif;
+  padding: 13px;
+  letter-spacing: 2px;
+  text-align: center;
+  color: rgb(241, 224, 193);
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+.loader {
+  border: 6px solid rgb(241, 224, 193);
+  border-top: 6px solid #db8e1e;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* recipe */
+.recipe-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(219, 142, 30, 0.2);
+  border: 1px solid #db8e1e;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.recipe-item {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.recipe-item p {
+  font-size: 1.3rem;
+  font-family: "Eczar", serif;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 10px;
+  color: rgb(241, 224, 193);
+}
+
+.recipe-item img {
+  height: auto;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.recipe-item img:hover {
+  border-right: 8px solid black;
+  border-bottom: 8px solid black;
+}
+
+/****** footer******* */
+
+.footer {
+  background-color: black;
+  color: rgb(241, 224, 193);
+  font-family: "Eczar", serif;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.footer-title {
+  font-family: "Lobster Two", sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  border-bottom: 1px solid #db8e1e;
+}
+
+.contact-info,
+.footer-links,
+.social-media {
+  margin-bottom: 20px;
+  color: #db8e1e;
+}
+
+.contact-info p,
+.footer-links ul,
+.social-media a {
+  margin: 5px 0;
+  padding: 5px;
+  font-size: 1rem;
+  letter-spacing: 1.4px;
+  line-height: 2rem;
+  font-family: serif;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin: 5px 0;
+}
+
+.footer-links ul li a {
+  color: rgb(241, 224, 193);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.footer-links ul li a:hover {
+  text-decoration: underline;
+}
+
+.social-media a {
+  color: rgb(241, 224, 193);
+  margin: 0 10px;
+  font-size: 1.5em;
+}
+
+.footer-bottom {
+  border-top: 1px solid #db8e1e;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+}
+
+/* font-family: "Eczar", serif; */
+/* font-family: "Lobster Two", sans-serif; */
+/* background-color: rgb(69, 22, 22); */
+/* color: rgb(241, 224, 193); */
