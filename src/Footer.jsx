@@ -1,4 +1,4 @@
-import React from "react";
+import { NavLink } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { MdLocationOn, MdEmail, MdPhone } from "react-icons/md";
 
@@ -21,7 +21,7 @@ function Footer() {
         </div>
         <div className="footer-links">
           <h3 className="footer-title">Quick Links</h3>
-          <ul>
+          {/* <ul>
             <li>
               <a href="#home">Home</a>
             </li>
@@ -36,6 +36,23 @@ function Footer() {
             </li>
             <li>
               <a href="#privacy">Privacy Policy</a>
+            </li>
+          </ul> */}
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/services">Services</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
+            <li>
+              <NavLink to="privacy">Privacy policy</NavLink>
             </li>
           </ul>
         </div>

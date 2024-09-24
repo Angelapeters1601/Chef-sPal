@@ -1,4 +1,3 @@
-import Search from "./Search";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavComponent from "./NavComponent";
 
@@ -9,8 +8,7 @@ function Header() {
         <h1 className="title">Chef's Pal </h1>
         <p className="sub-title">Culinary Inspiration at Your Fingertips.</p>
       </div>
-      {/* <Search /> */}
-      <NavComponent className="nav-component" />
+      {/* <NavComponent className="nav-component" /> */}
     </div>
   );
 }
