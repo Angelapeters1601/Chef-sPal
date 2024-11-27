@@ -33,6 +33,7 @@ html {
   background-size: cover;
   color: var(--gold);
   overflow-x: hidden;
+  padding-top: 55px;
 }
 
 /* Background section with parallax effect */
@@ -81,6 +82,7 @@ html {
   font-family: "Eczar", serif;
   font-size: 4.5rem;
   letter-spacing: 3px;
+  margin-top: 30px;
 }
 
 .sub-title {
@@ -92,9 +94,14 @@ html {
 .nav {
   position: relative;
   z-index: 1000;
-  margin-left: 50%;
+  margin-left: 45%;
   top: 30px;
-  padding: 20px;
+  padding: 70px;
+  margin-top: -85px;
+  height: 100px;
+  background-color: transparent;
+
+  /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 .search-container {
@@ -131,7 +138,12 @@ html {
 .nav-offcanvas {
   height: 100vh;
   width: 100vw;
-  margin-top: 20px;
+}
+
+.nav-offcanvas:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .nav-title {
@@ -167,12 +179,17 @@ html {
   font-size: 1.4rem;
   letter-spacing: 3px;
   transition: 0.3 all ease-in-out;
+  /* just added */
+  /* margin-top: -50px; */
+  /* padding-top: 50px; */
 }
 
 .nav-links a {
   position: relative;
   display: inline-block;
   cursor: pointer;
+  /* just added */
+  /* padding-top: 150px; */
 }
 
 .nav-links a:hover {
@@ -399,6 +416,9 @@ html {
   padding: 70px 20px 10px;
   background-color: var(--black);
   color: var(--gold);
+  font-family: serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.6px;
 }
 
 /****** footer******* */

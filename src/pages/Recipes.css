@@ -1,0 +1,68 @@
+.recipes {
+  background-color: wheat;
+  margin-top: -80px;
+  padding: 50px;
+}
+
+.recipes h2 {
+  font-family: Eczar;
+  font-weight: 600;
+  font-size: 2rem;
+  padding-top: 50px;
+  text-align: center;
+}
+
+.recipes p {
+  font-family: lobster;
+  font-size: 1.2rem;
+  margin-top: 3px;
+  color: var(--black);
+}
+
+.recipes-card-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  background-color: tan;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.recipes-card-list .nav-link {
+  display: inline-block;
+  background-color: var(--light);
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: var(--black);
+  font-family: Eczar;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.recipes-card-list .nav-link:hover {
+  background-color: tan;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.recipes-card-list h3 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-family: Eczar;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.recipes-card-list h3 {
+  text-align: center;
+  color: var(--black);
+  font-family: Eczar;
+  font-weight: 500;
+}

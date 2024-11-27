@@ -8,7 +8,6 @@ function Header() {
         <h1 className="title">Chef's Pal </h1>
         <p className="sub-title">Culinary Inspiration at Your Fingertips.</p>
       </div>
-      {/* <NavComponent className="nav-component" /> */}
     </div>
   );
 }

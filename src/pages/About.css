@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Eczar:wght@400.about-subtitle.800&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+:root {
+  --light: rgb(241, 224, 193);
+  --gold: #db8e1e;
+  --deep-gold: rgba(219, 142, 30, 0.2);
+  --black: #000;
+  --shadow: 4px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.about {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: -50px;
+  padding-top: 50px;
+}
+
+.about-title {
+  text-align: center;
+  font-family: Eczar;
+  color: var(--gold);
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.about-subtitle,
+.history,
+.faq {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.about-subtitle h1,
+.history h1,
+.faq h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: Eczar;
+  font-weight: bold;
+  margin-top: 20px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  color: wheat;
+}
+
+.about-subtitle p,
+.history p,
+.faq p {
+  font-family: lobster;
+  font-size: 1.2rem;
+  color: var(--black);
+  color: var(--light);
+  margin-top: 20px;
+}
+
+.accordion {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.accordion-button {
+  background-color: wheat;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: Eczar;
+  letter-spacing: 0.6px;
+}
+
+.accordion-item {
+  font-family: Eczar;
+  font-size: 1rem;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.accordion-item .accordion-button:not(.collapsed) {
+  border: none;
+  box-shadow: none;
+  background-color: tan;
+  color: var(--black);
+}
