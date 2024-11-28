@@ -1,8 +1,8 @@
 import "./Recipes.css";
 import { NavLink } from "react-router-dom";
-import NavComponent from "../NavComponent";
+import NavComponent from "../components/NavComponent";
 import RecipesList from "./RecipesList";
-import Footer from "../footer";
+import Footer from "../components/Footer";
 
 function Recipes() {
   return (

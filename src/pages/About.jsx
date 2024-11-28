@@ -1,7 +1,7 @@
 import "./About.css";
-import Faq from "../Faq";
-import Footer from "../Footer";
-import NavComponent from "../NavComponent";
+import Faq from "../components/Faq";
+import Footer from "../components/Footer";
+import NavComponent from "../components/NavComponent";
 
 function About() {
   return (

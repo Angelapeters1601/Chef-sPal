@@ -1,4 +1,4 @@
-import recipe4 from "./assets/recipe4.jpg";
+import recipe4 from "../assets/recipe4.jpg";
 
 function Intro() {
   return (

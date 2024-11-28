@@ -1,6 +1,6 @@
 import "./contact.css";
-import NavComponent from "../NavComponent";
-import Footer from "../Footer";
+import NavComponent from "../components/NavComponent";
+import Footer from "../components/Footer";
 
 function Contact() {
   return (
