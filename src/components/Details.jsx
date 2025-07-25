@@ -1,37 +1,58 @@
+import { GiCookingPot, GiChefToque, GiMeal } from "react-icons/gi";
+import "./Details.css";
+
 function Details() {
+  const philosophyPoints = [
+    {
+      icon: <GiCookingPot className="philosophy-icon" />,
+      title: "The Art of Cooking",
+      content:
+        "We believe cooking is more than necessity—it's creative expression. Each recipe tells a story, and we provide the canvas for your culinary artistry.",
+    },
+    {
+      icon: <GiChefToque className="philosophy-icon" />,
+      title: "Global Flavors",
+      content:
+        "From Tokyo street food to Parisian pastries, we celebrate world cuisines with authentic yet approachable recipes for home cooks.",
+    },
+    {
+      icon: <GiMeal className="philosophy-icon" />,
+      title: "Sustainable Practices",
+      content:
+        "We promote zero-waste cooking with recipes that utilize whole ingredients and creative solutions for leftovers.",
+    },
+  ];
+
   return (
-    <div className="details">
-      {" "}
-      <p>
-        Cooking is more than just a necessity; it’s an art, a passion, and a way
-        to connect with loved ones. Chef's Pal is here to revolutionize your
-        culinary experience by becoming your trusted kitchen companion. Whether
-        you’re an experienced chef or a beginner eager to explore the world of
-        flavors, our app offers everything you need to transform ordinary meals
-        into extraordinary delights. From a rich library of recipes to handy
-        cooking tips, Chef's Pal ensures you always have the right tools to
-        create magic in the kitchen.
-      </p>
-      <p>
-        Designed with food lovers in mind, Chef's Pal is more than just a recipe
-        app. It's a platform that celebrates diversity in cooking, bringing
-        together recipes from around the globe, catering to every dietary need,
-        and inspiring creativity in every meal. With easy-to-follow
-        instructions, customizable meal plans, and personalized suggestions,
-        Chef's Pal is committed to making cooking approachable, enjoyable, and
-        rewarding. Whether you're looking for quick weekday dinners, indulgent
-        weekend treats, or healthy meal options, Chef's Pal has you covered.
-      </p>
-      <p>
-        At its heart, Chef's Pal is built to simplify your cooking journey while
-        enriching your relationship with food. Our app combines innovation and
-        tradition, providing modern tools like ingredient substitutes,
-        step-by-step guides, and smart shopping lists while honoring timeless
-        culinary practices. With Chef's Pal, you don’t just cook—you create
-        memories, explore cultures, and nurture your love for food. Let’s make
-        your kitchen the happiest place in your home, one recipe at a time.
-      </p>
-    </div>
+    <section className="philosophy-section">
+      <div className="philosophy-header">
+        <h2 className="section-title">Our Culinary Philosophy</h2>
+        <div className="gold-divider"></div>
+        <p className="section-intro">
+          At Chef's Pal, we're redefining what it means to cook at home through
+          three core principles that guide everything we create.
+        </p>
+      </div>
+
+      <div className="philosophy-grid">
+        {philosophyPoints.map((point, index) => (
+          <div key={index} className="philosophy-card">
+            <div className="icon-wrapper">{point.icon}</div>
+            <h3>{point.title}</h3>
+            <p>{point.content}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="culinary-commitment">
+        <h3>Our Commitment to You</h3>
+        <p>
+          Whether you're looking for quick weekday dinners or weekend culinary
+          projects, we're here to make every cooking experience joyful,
+          delicious, and uniquely yours.
+        </p>
+      </div>
+    </section>
   );
 }
 

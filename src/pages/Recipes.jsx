@@ -1,60 +1,64 @@
 import "./Recipes.css";
 import { NavLink } from "react-router-dom";
-import NavComponent from "../components/NavComponent";
 import RecipesList from "./RecipesList";
-import Footer from "../components/Footer";
+import { GiMeal, GiForkKnifeSpoon } from "react-icons/gi";
 
 function Recipes() {
-  return (
-    <>
-      <NavComponent />
+  const recipeCategories = [
+    { name: "Dinners", icon: <GiMeal /> },
+    { name: "Lunches", icon: <GiForkKnifeSpoon /> },
+    { name: "Breakfasts", icon: <GiMeal /> },
+    { name: "Desserts", icon: <GiForkKnifeSpoon /> },
+    { name: "Drinks", icon: <GiMeal /> },
+    { name: "Appetizers", icon: <GiForkKnifeSpoon /> },
+    { name: "Snacks", icon: <GiMeal /> },
+    { name: "Pastries", icon: <GiForkKnifeSpoon /> },
+    { name: "Herbs & Spices", icon: <GiMeal /> },
+    { name: "Side Dishes", icon: <GiForkKnifeSpoon /> },
+    { name: "Brunch", icon: <GiMeal /> },
+  ];
 
-      <div className="recipes">
-        <h2>Recipes & Cooking Ideas 😋</h2>
-        <p>
-          We know the deal. We feel your pain. Here are our superstar workhouse
-          recipes, designed and tested to help you cook a great family meal.
-        </p>
-        <div className="recipes-card-list">
-          <h3>Explore</h3>
-          <NavLink to="/" className="nav-link">
-            Dinners
-          </NavLink>
-          <NavLink to="/" className="nav-link">
-            Lunches
-          </NavLink>
-          <NavLink to="/" className="nav-link">
-            Breakfasts
-          </NavLink>
-          <NavLink to="/" className="nav-link">
-            Desserts
-          </NavLink>
-          <NavLink to="/" className="nav-link">
-            Drinks
-          </NavLink>
-          <NavLink to="/" className="nav-link">
-            Appetizers
-          </NavLink>{" "}
-          <NavLink to="/" className="nav-link">
-            snacks
-          </NavLink>{" "}
-          <NavLink to="/" className="nav-link">
-            pastries
-          </NavLink>{" "}
-          <NavLink to="/" className="nav-link">
-            Herbs & spices
-          </NavLink>{" "}
-          <NavLink to="/" className="nav-link">
-            Side dishes
-          </NavLink>
-          <NavLink to="/" className="nav-link">
-            brunch
-          </NavLink>
+  return (
+    <div className="recipes-container">
+      <section className="recipes-hero">
+        <div className="hero-content">
+          <h1 className="hero-title">
+            <span className="title-icon">🍳</span>
+            Recipes & Culinary Creations
+          </h1>
+          <p className="hero-description">
+            Discover our carefully curated collection of family-tested recipes,
+            each designed to bring joy to your kitchen and delicious meals to
+            your table.
+          </p>
         </div>
-      </div>
-      <RecipesList />
-      <Footer />
-    </>
+      </section>
+
+      <section className="category-navigation">
+        <div className="category-container">
+          <h2 className="section-title">
+            <GiForkKnifeSpoon className="title-icon" />
+            Explore Categories
+          </h2>
+          <div className="category-grid">
+            {recipeCategories.map((category, index) => (
+              <NavLink to="/" className="category-card" key={index}>
+                <div className="category-icon">{category.icon}</div>
+                <span className="category-name">{category.name}</span>
+              </NavLink>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="featured-recipes">
+        <h2 className="section-title">
+          <GiMeal className="title-icon" />
+          Featured Recipes
+        </h2>
+        <RecipesList />
+      </section>
+    </div>
   );
 }
 

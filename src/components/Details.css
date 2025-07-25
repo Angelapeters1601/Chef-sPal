@@ -1,0 +1,121 @@
+.philosophy-section {
+  background-color: #f8f4e8;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.section-title {
+  font-family: "Eczar", serif;
+  font-size: 2.5rem;
+  color: #db8e1e;
+  margin-bottom: 1rem;
+}
+
+.gold-divider {
+  width: 100px;
+  height: 3px;
+  background-color: #db8e1e;
+  margin: 0 auto 1.5rem;
+}
+
+.section-intro {
+  font-family: "Eczar", cursive;
+  font-size: 1.2rem;
+  color: #2a2a2a;
+  line-height: 1.6;
+}
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+}
+
+.philosophy-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.philosophy-card:hover {
+  transform: translateY(-8px);
+}
+
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background: rgba(219, 142, 30, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.philosophy-icon {
+  font-size: 2.5rem;
+  color: #db8e1e;
+}
+
+.philosophy-card h3 {
+  font-family: "Eczar", serif;
+  color: #2a2a2a;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.philosophy-card p {
+  font-family: "Eczar", cursive;
+  color: #555;
+  line-height: 1.6;
+}
+
+.culinary-commitment {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(219, 142, 30, 0.05);
+  border-radius: 12px;
+  border-top: 3px solid #db8e1e;
+}
+
+.culinary-commitment h3 {
+  font-family: "Eczar", serif;
+  color: #db8e1e;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.culinary-commitment p {
+  font-family: "Eczar", cursive;
+  color: #2a2a2a;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .philosophy-card {
+    padding: 1.5rem;
+  }
+}

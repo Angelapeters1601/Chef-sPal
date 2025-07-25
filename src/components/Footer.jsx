@@ -1,6 +1,13 @@
 import { NavLink } from "react-router-dom";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
 import { MdLocationOn, MdEmail, MdPhone } from "react-icons/md";
+import "./Footer.css";
 
 function Footer() {
   return (
@@ -9,35 +16,17 @@ function Footer() {
         <div className="contact-info">
           <h3 className="footer-title">Contact Us</h3>
           <p>
-            <MdLocationOn size={30} color="#db8e1e" /> Benin, City, Edo State,
-            Nigeria
+            <MdLocationOn size={20} color="#db8e1e" /> Lagos, Nigeria
           </p>
           <p>
-            <MdEmail size={30} color="#db8e1e" /> angelnwattaha@gmail.com
+            <MdEmail size={20} color="#db8e1e" /> angelnwattaha@gmail.com
           </p>
           <p>
-            <MdPhone size={30} color="#db8e1e" /> + (234) - 810 435 2294
+            <MdPhone size={20} color="#db8e1e" /> + (234) - 810 435 2294
           </p>
         </div>
         <div className="footer-links">
           <h3 className="footer-title">Quick Links</h3>
-          {/* <ul>
-            <li>
-              <a href="#home">Home</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#services">Services</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-            <li>
-              <a href="#privacy">Privacy Policy</a>
-            </li>
-          </ul> */}
           <ul>
             <li>
               <NavLink to="/">Home</NavLink>
@@ -51,36 +40,40 @@ function Footer() {
             <li>
               <NavLink to="/contact">Contact</NavLink>
             </li>
-            <li>
-              <NavLink to="privacy">Privacy policy</NavLink>
-            </li>
           </ul>
         </div>
         <div className="social-media">
           <h3 className="footer-title">Follow Us</h3>
           <a
-            href="https://facebook.com"
+            href="https://github.com/Angelapeters1601"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="https://facebook.com/nwattah.angela"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaFacebook />
           </a>
           <a
-            href="https://twitter.com"
+            href="https://x.com/mavoolumma"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaTwitter />
           </a>
           <a
-            href="https://instagram.com"
+            href="https://instagram.com/angelapeters"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaInstagram />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://linkedin.com/in/nwattah-angela"
             target="_blank"
             rel="noopener noreferrer"
           >

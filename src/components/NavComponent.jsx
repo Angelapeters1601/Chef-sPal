@@ -1,71 +1,123 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { CiSearch } from "react-icons/ci";
 import { GiKnifeFork } from "react-icons/gi";
+import "./NavComponent.css";
 
 function NavComponent() {
-  const [show, setShow] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        menuOpen &&
+        !e.target.closest(".mobile-menu") &&
+        !e.target.closest(".menu-btn")
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [menuOpen]);
+
+  const getActiveClass = ({ isActive }) =>
+    isActive ? "nav-link active" : "nav-link";
+
+  const getMobileActiveClass = ({ isActive }) =>
+    isActive ? "mobile-link active" : "mobile-link";
 
   return (
-    <Navbar expand="lg" className="nav">
-      <Container fluid>
-        <Navbar.Brand href="#"></Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="offcanvasNavbar"
-          className="nav-open-btn"
-          onClick={handleShow} // Open Offcanvas
-        />
-        <Navbar.Offcanvas
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-          placement="end"
-          show={show} // Control visibility
-          onHide={handleClose} // Handle close with backdrop click
-          className="nav-offcanvas"
+    <nav className="navbar">
+      {/* Logo */}
+      <NavLink to="/" className="logo-group">
+        <h1 className="logo">Chef's Pal</h1>
+        <p className="subtitle">Culinary Inspiration at Your Fingertips</p>
+      </NavLink>
+
+      {/* Desktop Links */}
+      <div className="nav-links">
+        <NavLink to="/" className={getActiveClass}>
+          Home
+        </NavLink>
+        <NavLink to="/about" className={getActiveClass}>
+          About
+        </NavLink>
+        <NavLink to="/services" className={getActiveClass}>
+          Services
+        </NavLink>
+        <NavLink to="/recipes" className={getActiveClass}>
+          Recipes
+        </NavLink>
+        <NavLink to="/contact" className={getActiveClass}>
+          Contact
+        </NavLink>
+      </div>
+
+      {/* Mobile Menu Button */}
+      <button
+        className={`menu-btn ${menuOpen ? "open" : ""}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          setMenuOpen(!menuOpen);
+        }}
+        aria-label="Menu"
+      >
+        {menuOpen ? (
+          <GiKnifeFork
+            className="close-icon"
+            onClick={() => setMenuOpen(false)}
+          />
+        ) : (
+          <div className="hamburger" onClick={() => setMenuOpen(true)}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        )}
+      </button>
+
+      {/* Mobile Menu */}
+      <div
+        className={`mobile-menu ${menuOpen ? "open" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <NavLink
+          to="/"
+          className={getMobileActiveClass}
+          onClick={() => setMenuOpen(false)}
         >
-          <Offcanvas.Header closeButton className="nav-title">
-            <Offcanvas.Title id="offcanvasNavbarLabel">
-              <h2>Learn More</h2>
-              <GiKnifeFork className="btn-close-icon" onClick={handleClose} />
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body className="nav-links">
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link as={NavLink} to="/" onClick={handleClose}>
-                Home
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/about" onClick={handleClose}>
-                About
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/services" onClick={handleClose}>
-                Services
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/recipes" onClick={handleClose}>
-                Recipes
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/contact" onClick={handleClose}>
-                Contact
-              </Nav.Link>
-            </Nav>
-            <div className="search-container">
-              <input
-                type="text"
-                className="nav-search"
-                placeholder="Search for recipe..."
-              />
-              <CiSearch className="search-icon" />
-            </div>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-      </Container>
-    </Navbar>
+          Home
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={getMobileActiveClass}
+          onClick={() => setMenuOpen(false)}
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/services"
+          className={getMobileActiveClass}
+          onClick={() => setMenuOpen(false)}
+        >
+          Services
+        </NavLink>
+        <NavLink
+          to="/recipes"
+          className={getMobileActiveClass}
+          onClick={() => setMenuOpen(false)}
+        >
+          Recipes
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={getMobileActiveClass}
+          onClick={() => setMenuOpen(false)}
+        >
+          Contact
+        </NavLink>
+      </div>
+    </nav>
   );
 }
 

@@ -1,0 +1,18 @@
+:root {
+  --gold: #db8e1e;
+  --cream: #f8f4e8;
+  --charcoal: #2a2a2a;
+  --deep-gold: rgba(219, 142, 30, 0.2);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-page {
+  background-color: var(--cream);
+  padding: 2rem 0;
+}
+
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

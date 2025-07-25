@@ -1,6 +1,6 @@
 import RecipesCard from "./RecipesCard";
-import Loader from "../components/Loader";
-import ErrorMessage from "../components/ErrorMessage";
+import Loader from "../ui/Loader";
+import ErrorMessage from "../ui/ErrorMessage";
 import { useRecipeContext } from "../context/RecipeContext";
 
 function RecipesList() {

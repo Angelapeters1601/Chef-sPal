@@ -1,0 +1,258 @@
+:root {
+  --gold: #db8e1e;
+  --gold-light: rgba(219, 142, 30, 0.1);
+  --charcoal: #2a2a2a;
+  --cream: #f8f4e8;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Container */
+.intro-section {
+  position: relative;
+  padding: 5rem 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+}
+
+.intro-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Image Styling */
+.intro-image-wrapper {
+  width: 50%;
+  position: relative;
+}
+
+.intro-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow);
+  transform: perspective(1000px) rotateY(-10deg);
+  transition: transform 0.5s ease;
+}
+
+.image-frame {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  z-index: 1;
+  transition: all 0.5s ease;
+}
+
+.image-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gold-light);
+  border-radius: 8px;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+/* Text Content */
+.intro-text-content {
+  width: 50%;
+}
+
+.title-wrapper {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.intro-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--charcoal);
+  margin: 0;
+  font-family: "Playfair Display", serif;
+}
+
+.title-line {
+  display: block;
+}
+
+.title-accent {
+  color: var(--gold);
+  position: relative;
+  display: inline-block;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: var(--gold);
+  margin-top: 1rem;
+}
+
+.intro-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--charcoal);
+  margin-bottom: 3rem;
+  font-family: "Lora", serif;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--gold);
+}
+
+/* Button Styling */
+.cta-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cta-button {
+  background: var(--gold);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  transition: all 0.4s ease;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.button-hover-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--charcoal);
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  border-radius: 50px;
+}
+
+.cta-button:hover .button-hover-effect {
+  transform: translateX(0);
+}
+
+.cta-decoration {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cta-decoration .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.cta-decoration .line {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* Floating Icons */
+.floating-icon {
+  position: absolute;
+  font-size: 3rem;
+  color: var(--gold-light);
+  z-index: 1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.icon-1 {
+  top: 20%;
+  left: 5%;
+}
+
+.icon-2 {
+  bottom: 15%;
+  right: 8%;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Hover Effects */
+.intro-container:hover .intro-img {
+  transform: perspective(1000px) rotateY(0deg);
+}
+
+.intro-container:hover .image-frame {
+  top: -15px;
+  left: -15px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .intro-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .intro-image-wrapper,
+  .intro-text-content {
+    width: 100%;
+  }
+
+  .intro-img {
+    height: 400px;
+  }
+
+  .intro-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-title {
+    font-size: 2rem;
+  }
+
+  .intro-description {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.8rem 2rem;
+  }
+}

@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
-import ErrorMessage from "./ErrorMessage";
+import "./Recipe.css";
+import ErrorMessage from "../ui/ErrorMessage";
 import RecipeList from "./RecipeList";
-import Loader from "./Loader";
+import Loader from "../ui/Loader";
 import { useRecipeContext } from "../context/RecipeContext";
 
 function Recipe() {
   const { recipe, isLoading, error } = useRecipeContext();
 
   return (
-    <div>
+    <section className="recipe-section">
       {isLoading && <Loader />}
       {error && <ErrorMessage message={error} />}
-      {recipe.length > 0 &&
-        recipe.map((r) => (
-          <RecipeList recipe={r.title} image={r.image} key={r.id} />
-        ))}
-    </div>
+      <div className="recipe-grid">
+        {recipe.length > 0 &&
+          recipe.map((r) => (
+            <RecipeList recipe={r.title} image={r.image} key={r.id} />
+          ))}
+      </div>
+    </section>
   );
 }
-
 export default Recipe;
 // https://api.spoonacular.com/recipes/complexSearch

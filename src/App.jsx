@@ -7,7 +7,9 @@ import Recipes from "./pages/Recipes";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { RecipeContextProvider } from "./context/RecipeContext";
-// import NavComponent from "./components/NavComponent";
+import AppLayout from "./components/AppLayout";
+import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTopOnRouteChange from "./components/ScrollToTopOnRouteChange";
 
 function App() {
   return (
@@ -15,17 +17,18 @@ function App() {
       <RecipeContextProvider>
         <div className="app">
           <div className="background"></div>
-          <div className="content">
-            {/* <NavComponent /> */}
-            <Routes>
-              <Route path="/" element={<Home />} />
+          <ScrollToTopOnRouteChange />
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<AppLayout />}>
+              <Route index element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
+            </Route>
+          </Routes>
         </div>
       </RecipeContextProvider>
     </BrowserRouter>
