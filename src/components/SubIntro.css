@@ -1,0 +1,29 @@
+.sub-intro-section {
+  text-align: center;
+  margin: 4rem 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-icon {
+  font-size: 2rem;
+  color: var(--gold);
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: var(--charcoal);
+  font-family: "Eczar", serif;
+}
+
+.section-subtitle {
+  font-family: "Eczar", serif;
+  color: var(--gold);
+  font-size: 1.2rem;
+}
