@@ -1,7 +1,7 @@
 import { GiSpoon } from "react-icons/gi";
-import "./SubIntro.css";
+import "./HomePageSubIntro.css";
 
-function SubIntro() {
+function HomePageSubIntro() {
   return (
     <section className="sub-intro-section">
       <div className="section-header">
@@ -15,4 +15,4 @@ function SubIntro() {
   );
 }
 
-export default SubIntro;
+export default HomePageSubIntro;

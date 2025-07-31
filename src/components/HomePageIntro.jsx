@@ -1,9 +1,9 @@
 import recipe4 from "../assets/recipe4.jpg";
-import "./Intro.css";
+import "./HomePageIntro.css";
 import { GiCookingPot, GiKnifeFork } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
-function Intro() {
+function HomePageIntro() {
   return (
     <section className="intro-section">
       {/* Decorative elements */}
@@ -54,4 +54,4 @@ function Intro() {
   );
 }
 
-export default Intro;
+export default HomePageIntro;

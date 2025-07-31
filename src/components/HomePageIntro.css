@@ -1,6 +1,6 @@
 :root {
-  --gold: #db8e1e;
-  --gold-light: rgba(219, 142, 30, 0.1);
+  --gold: #eb9e2c;
+  --gold-light: #eb9e2c;
   --charcoal: #2a2a2a;
   --cream: #f8f4e8;
   --shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
@@ -181,14 +181,15 @@
 .floating-icon {
   position: absolute;
   font-size: 3rem;
-  color: var(--gold-light);
+  color: rgba(218, 160, 44);
+  opacity: 0.2;
   z-index: 1;
   animation: float 6s ease-in-out infinite;
 }
 
 .icon-1 {
   top: 20%;
-  left: 5%;
+  left: 2%;
 }
 
 .icon-2 {
