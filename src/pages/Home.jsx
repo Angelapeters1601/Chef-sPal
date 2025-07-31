@@ -1,16 +1,16 @@
-import Intro from "../components/Intro";
-import Details from "../components/Details";
-import Recipe from "../components/Recipe";
-import SubIntro from "../components/SubIntro";
+import HomePageIntro from "../components/HomePageIntro";
+import HomePageDetails from "../components/HomePageDetails";
+import HomePageRecipe from "../components/HomePageRecipe";
+import HomePageSubIntro from "../components/HomePageSubIntro";
 
 function Home() {
   return (
     <div className="home-page">
       <div className="home-container">
-        <Intro />
-        <SubIntro />
-        <Recipe />
-        <Details />
+        <HomePageIntro />
+        <HomePageSubIntro />
+        <HomePageRecipe />
+        <HomePageDetails />
       </div>
     </div>
   );

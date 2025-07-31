@@ -1,9 +1,14 @@
-import "./Recipes.css";
+import { useState } from "react";
+import "./RecipesPage.css";
 import { NavLink } from "react-router-dom";
-import RecipesList from "./RecipesList";
+import RecipesPageList from "./RecipesPageList";
+import Search from "../components/Search";
 import { GiMeal, GiForkKnifeSpoon } from "react-icons/gi";
 
-function Recipes() {
+function RecipesPage() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const recipeCategories = [
     { name: "Dinners", icon: <GiMeal /> },
     { name: "Lunches", icon: <GiForkKnifeSpoon /> },
@@ -15,8 +20,21 @@ function Recipes() {
     { name: "Pastries", icon: <GiForkKnifeSpoon /> },
     { name: "Herbs & Spices", icon: <GiMeal /> },
     { name: "Side Dishes", icon: <GiForkKnifeSpoon /> },
-    { name: "Brunch", icon: <GiMeal /> },
   ];
+
+  const filteredCategories = recipeCategories.filter((category) =>
+    category.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
+  const handleCategoryClick = (categoryName) => {
+    setSelectedCategory(
+      categoryName === selectedCategory ? null : categoryName
+    );
+  };
 
   return (
     <div className="recipes-container">
@@ -40,13 +58,26 @@ function Recipes() {
             <GiForkKnifeSpoon className="title-icon" />
             Explore Categories
           </h2>
+          <Search onSearch={handleSearch} />
           <div className="category-grid">
-            {recipeCategories.map((category, index) => (
-              <NavLink to="/" className="category-card" key={index}>
-                <div className="category-icon">{category.icon}</div>
-                <span className="category-name">{category.name}</span>
-              </NavLink>
-            ))}
+            {filteredCategories.length > 0 ? (
+              filteredCategories.map((category, index) => (
+                <button
+                  className={`category-card ${
+                    selectedCategory === category.name ? "active" : ""
+                  }`}
+                  key={index}
+                  onClick={() => handleCategoryClick(category.name)}
+                >
+                  <div className="category-icon">{category.icon}</div>
+                  <span className="category-name">{category.name}</span>
+                </button>
+              ))
+            ) : (
+              <div className="no-results">
+                No categories found matching "{searchTerm}"
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -54,12 +85,14 @@ function Recipes() {
       <section className="featured-recipes">
         <h2 className="section-title">
           <GiMeal className="title-icon" />
-          Featured Recipes
+          {selectedCategory
+            ? `${selectedCategory} Recipes`
+            : "Featured Recipes"}
         </h2>
-        <RecipesList />
+        <RecipesPageList selectedCategory={selectedCategory} />
       </section>
     </div>
   );
 }
 
-export default Recipes;
+export default RecipesPage;

@@ -1,7 +1,7 @@
 import { GiCookingPot, GiChefToque, GiMeal } from "react-icons/gi";
-import "./Details.css";
+import "./HomePageDetails.css";
 
-function Details() {
+function HomePageDetails() {
   const philosophyPoints = [
     {
       icon: <GiCookingPot className="philosophy-icon" />,
@@ -56,4 +56,4 @@ function Details() {
   );
 }
 
-export default Details;
+export default HomePageDetails;

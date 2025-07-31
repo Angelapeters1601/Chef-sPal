@@ -17,7 +17,7 @@ function About() {
         <div className="hero-content">
           <h1 className="about-title">
             <GiCookingPot className="title-icon" />
-            About Chef'sPal
+            About Chef's Pal
           </h1>
           <p className="about-tagline">
             Where culinary passion meets innovation

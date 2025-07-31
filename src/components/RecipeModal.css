@@ -1,0 +1,422 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 9rem;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+}
+
+.modal-content {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f4e5 100%);
+  border-radius: 16px;
+  box-shadow: 0 15px 50px rgba(233, 176, 79, 0.3);
+  width: 85%;
+  max-width: 900px;
+  max-height: calc(90vh - 80px);
+  min-height: 500px;
+  overflow-y: auto;
+  padding: 40px;
+  color: #333;
+  font-family: "Eczar", Arial, sans-serif;
+  border: 1px solid rgba(233, 176, 79, 0.3);
+  margin-bottom: 40px;
+}
+
+/* Floral corner decorations */
+.floral-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+}
+
+.floral-corner.top-left {
+  top: 10px;
+  left: 10px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23e9b04f" d="M30,10 Q50,5 70,20 Q85,35 90,60 Q95,85 80,90 Q65,95 40,80 Q15,65 10,40 Q5,15 30,10"/></svg>');
+}
+
+.floral-corner.top-right {
+  top: 10px;
+  right: 10px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23d4a145" d="M70,10 Q50,5 30,20 Q15,35 10,60 Q5,85 20,90 Q35,95 60,80 Q85,65 90,40 Q95,15 70,10"/></svg>');
+}
+
+.floral-corner.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23d4a145" d="M30,90 Q50,95 70,80 Q85,65 90,40 Q95,15 80,10 Q65,5 40,20 Q15,35 10,60 Q5,85 30,90"/></svg>');
+}
+
+.floral-corner.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23e9b04f" d="M70,90 Q50,95 30,80 Q15,65 10,40 Q5,15 20,10 Q35,5 60,20 Q85,35 90,60 Q95,85 70,90"/></svg>');
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #e9b04f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(233, 176, 79, 0.4);
+}
+
+.close-button:hover {
+  background: #d4a145;
+  transform: scale(1.1);
+  box-shadow: 0 3px 15px rgba(233, 176, 79, 0.6);
+}
+
+.close-tooltip {
+  position: absolute;
+  right: 45px;
+  white-space: nowrap;
+  background: #e9b04f;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close-button:hover .close-tooltip {
+  opacity: 1;
+}
+
+.modal-header {
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.title-wrapper {
+  display: inline-block;
+  position: relative;
+  padding: 0 30px;
+}
+
+.modal-title {
+  font-size: 2.4rem;
+  margin: 0;
+  color: #5a3921;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  position: relative;
+  padding-bottom: 10px;
+  font-family: "Eczar", serif;
+}
+
+.title-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #e9b04f, #d4a145, #b88735, transparent);
+  border-radius: 3px;
+}
+
+.dietary-badges {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.dietary-badge {
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.dietary-badge.vegan {
+  background: linear-gradient(135deg, #81c784 0%, #4caf50 100%);
+  color: white;
+}
+
+.dietary-badge.non-vegan {
+  background: linear-gradient(135deg, #ff8a65 0%, #f4511e 100%);
+  color: white;
+}
+
+.dietary-badge.gluten-free {
+  background: linear-gradient(135deg, #64b5f6 0%, #1e88e5 100%);
+  color: white;
+}
+
+.dietary-badge.contains-gluten {
+  background: linear-gradient(135deg, #ffb74d 0%, #fb8c00 100%);
+  color: white;
+}
+
+.badge-icon {
+  font-size: 16px;
+}
+
+.modal-img {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  margin-bottom: 10px;
+  transition: all ease-in-out;
+}
+
+.modal-img:hover {
+  opacity: 0.8;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.info-section {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(233, 176, 79, 0.2);
+}
+
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+  color: #b88735;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Eczar", serif;
+}
+
+.section-icon {
+  font-size: 1.2rem;
+  color: #e9b04f;
+}
+
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, #e9b04f, #f8f4e5);
+  margin-bottom: 10px;
+}
+
+.summary-section {
+  border-left: 5px solid #e9b04f;
+  background: linear-gradient(to right, white 0%, #fffaf0 100%);
+}
+
+.summary-content {
+  line-height: 1.7;
+  color: #555;
+  font-size: 15px;
+}
+
+.summary-content p {
+  margin: 0 0 15px 0;
+}
+
+.summary-content a {
+  color: #e9b04f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.summary-content a:hover {
+  text-decoration: underline;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.grid-column {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.diet-tag,
+.dish-tag,
+.occasion-tag {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.diet-tag {
+  background: linear-gradient(135deg, #f8f4e5 0%, #f0e6cc 100%);
+  border: 1px solid #e9b04f;
+  color: #b88735;
+}
+
+.dish-tag {
+  background: linear-gradient(135deg, #fff5e6 0%, #ffebcc 100%);
+  border: 1px solid #d4a145;
+  color: #8b5a2b;
+}
+
+.occasion-tag {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  border: 1px solid #ccc;
+  color: #5a3921;
+}
+
+.rating-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.rating-item:last-child {
+  margin-bottom: 0;
+}
+
+.rating-label {
+  color: #777;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.rating-value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  width: 55%;
+}
+
+.rating-value {
+  font-weight: 700;
+  color: #5a3921;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rating-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #f0e6cc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rating-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e9b04f, #d4a145);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.points-visual {
+  display: flex;
+  gap: 8px;
+}
+
+.point-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f0e6cc;
+  transition: all 0.3s ease;
+}
+
+.point-dot.active {
+  background: linear-gradient(135deg, #e9b04f, #d4a145);
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding-top: 8rem;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 25px;
+    max-height: calc(95vh - 60px);
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .dietary-badge {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content {
+  animation: fadeIn 0.4s ease-out forwards;
+}

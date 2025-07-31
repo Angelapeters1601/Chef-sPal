@@ -8,3 +8,13 @@
   gap: 2rem;
   margin-top: 2rem;
 }
+
+.vegan-icon {
+  color: #2e8b57;
+  font-size: 0.9rem;
+}
+
+.non-vegan-icon {
+  color: #cd5c5c;
+  font-size: 0.9rem;
+}

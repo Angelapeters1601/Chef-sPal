@@ -2,8 +2,33 @@ import "./Contact.css";
 import { MdEmail, MdPhone, MdAccessTime } from "react-icons/md";
 import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 import contactHeroImage from "../assets/img2.png";
+import emailjs from "emailjs-com";
+import { useRef } from "react";
 
 function Contact() {
+  const formRef = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_qhvrrla",
+        "template_rvcihgf",
+        formRef.current,
+        "1rD7rvESdpGFoWWTN"
+      )
+      .then(
+        (result) => {
+          alert("Message sent successfully!");
+          formRef.current.reset();
+        },
+        (error) => {
+          alert("Failed to send message. Please try again.");
+        }
+      );
+  };
+
   return (
     <div className="contact-page">
       {/* Hero Section */}
@@ -75,8 +100,9 @@ function Contact() {
         <p>
           Have a recipe idea or feature request? Your input helps us improve!
         </p>
-        <form className="feedback-form">
+        <form ref={formRef} onSubmit={sendEmail} className="feedback-form">
           <textarea
+            name="message"
             placeholder="Your suggestions..."
             className="feedback-input"
             rows="5"
