@@ -15,7 +15,8 @@ Chef’s Pal uses **ReactJS** for the frontend, with **Context API** for global 
 
 ---
 
- 70% Complete — To be hosted on **Vercel**
+ 85% Complete — hosted on **github**
+ live: "https://github.com/angelapeters1601.io/chef-sPal",
 
 ---
 
