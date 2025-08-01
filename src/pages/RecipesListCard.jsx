@@ -25,6 +25,8 @@ export default function RecipesListCard({
   tags,
   ratings,
   servings,
+  isFavorite,
+  onFavoriteToggle,
 }) {
   return (
     <Link to={`/recipes/${id}`} className="recipe-card-link">
@@ -35,14 +37,18 @@ export default function RecipesListCard({
             alt={title}
             className="recipe-img"
           />
+          {/* Favorite Button */}
           <button
-            className="favorite-button"
+            className={`favorite-button ${isFavorite ? "active" : ""}`}
             onClick={(e) => {
               e.preventDefault();
-              // Handle favorite logic will be here
+              onFavoriteToggle(id);
             }}
+            aria-label={
+              isFavorite ? "Remove from favorites" : "Add to favorites"
+            }
           >
-            <FaHeart />
+            <FaHeart className="heart-icon" />
           </button>
           {ratings && (
             <div className="rating-badge">

@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import mockRecipes from "../utils/mockData";
 
 const RecipeContext = createContext();
@@ -17,8 +23,35 @@ function RecipeContextProvider({ children }) {
   const [weightWatcherSmartPoints, setWeightWatcherSmartPoints] = useState("");
   const [spoonacularScore, setSpoonacularScore] = useState("");
   const [error, setError] = useState("");
+  const [favorites, setFavorites] = useState(() => {
+    // Initialize from localStorage if available
+    const savedFavorites = localStorage.getItem("favoriteRecipes");
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
 
   const key = import.meta.env.VITE_SPOONACULAR_API_KEY;
+
+  // Save favorites to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const toggleFavorite = useCallback((recipeId) => {
+    setFavorites((prevFavorites) => {
+      if (prevFavorites.includes(recipeId)) {
+        return prevFavorites.filter((id) => id !== recipeId);
+      } else {
+        return [...prevFavorites, recipeId];
+      }
+    });
+  }, []);
+
+  const isFavorite = useCallback(
+    (recipeId) => {
+      return favorites.includes(recipeId);
+    },
+    [favorites]
+  );
 
   const fetchRecipes = async (url) => {
     setIsLoading(true);
@@ -28,7 +61,6 @@ function RecipeContextProvider({ children }) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      // console.log(data.results);
       setRecipe(data.results || []);
       setError("");
     } catch (err) {
@@ -43,9 +75,9 @@ function RecipeContextProvider({ children }) {
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${key}&number=12&addRecipeInformation=true`,
       setRecipe
     );
-  }, []);
+  }, [key]);
 
-  const fetchRecipesByDishType = async (dishTypes) => {
+  const fetchRecipesByDishType = useCallback(async (dishTypes) => {
     setIsLoading(true);
     try {
       const typesArray = Array.isArray(dishTypes)
@@ -72,7 +104,7 @@ function RecipeContextProvider({ children }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   const fetchRecipeById = async (id) => {
     setIsLoading(true);
@@ -114,6 +146,9 @@ function RecipeContextProvider({ children }) {
         spoonacularScore,
         fetchRecipesByDishType,
         fetchRecipeById,
+        favorites,
+        toggleFavorite,
+        isFavorite,
       }}
     >
       {children}

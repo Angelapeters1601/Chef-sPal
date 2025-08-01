@@ -1,13 +1,27 @@
 import { useState } from "react";
 import "./RecipesPage.css";
-import { NavLink } from "react-router-dom";
 import RecipesPageList from "./RecipesPageList";
 import Search from "../components/Search";
 import { GiMeal, GiForkKnifeSpoon } from "react-icons/gi";
+import {
+  FaLeaf,
+  FaCheckCircle,
+  FaFire,
+  FaClock,
+  FaFilter,
+} from "react-icons/fa";
 
 function RecipesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    vegan: false,
+    glutenFree: false,
+    cookingTime: 0,
+    difficulty: "",
+    calories: 0,
+  });
 
   const recipeCategories = [
     { name: "Dinners", icon: <GiMeal /> },
@@ -22,13 +36,27 @@ function RecipesPage() {
     { name: "Side Dishes", icon: <GiForkKnifeSpoon /> },
   ];
 
+  const handleFilterChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      vegan: false,
+      glutenFree: false,
+      cookingTime: 0,
+      difficulty: "",
+      calories: 0,
+    });
+  };
+
   const filteredCategories = recipeCategories.filter((category) =>
     category.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-  };
 
   const handleCategoryClick = (categoryName) => {
     setSelectedCategory(
@@ -58,7 +86,99 @@ function RecipesPage() {
             <GiForkKnifeSpoon className="title-icon" />
             Explore Categories
           </h2>
-          <Search onSearch={handleSearch} />
+          <div className="search-filter-container">
+            <Search onSearch={setSearchTerm} />
+            <button
+              className={`filter-toggle ${showFilters ? "active" : ""}`}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <FaFilter /> {showFilters ? "Hide Filters" : "Show Filters"}
+            </button>
+          </div>
+
+          {showFilters && (
+            <div className="filters-panel">
+              <div className="filter-group">
+                <label className="filter-label">
+                  <input
+                    type="checkbox"
+                    name="vegan"
+                    checked={filters.vegan}
+                    onChange={handleFilterChange}
+                    className="filter-checkbox"
+                  />
+                  <FaLeaf className="filter-icon" /> Vegan
+                </label>
+                <label className="filter-label">
+                  <input
+                    type="checkbox"
+                    name="glutenFree"
+                    checked={filters.glutenFree}
+                    onChange={handleFilterChange}
+                    className="filter-checkbox"
+                  />
+                  <FaCheckCircle className="filter-icon" /> Gluten Free
+                </label>
+              </div>
+
+              <div className="filter-group">
+                <label className="filter-label">
+                  <FaClock className="filter-icon" /> Max Cooking Time:
+                  <select
+                    name="cookingTime"
+                    value={filters.cookingTime}
+                    onChange={handleFilterChange}
+                    className="filter-select"
+                  >
+                    <option value="0">Any</option>
+                    <option value="15">≤ 15 mins</option>
+                    <option value="30">≤ 30 mins</option>
+                    <option value="60">≤ 1 hour</option>
+                    <option value="120">≤ 2 hours</option>
+                  </select>
+                </label>
+              </div>
+
+              <div className="filter-group">
+                <label className="filter-label">
+                  Difficulty:
+                  <select
+                    name="difficulty"
+                    value={filters.difficulty}
+                    onChange={handleFilterChange}
+                    className="filter-select"
+                  >
+                    <option value="">Any</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                  </select>
+                </label>
+              </div>
+
+              <div className="filter-group">
+                <label className="filter-label">
+                  <FaFire className="filter-icon" /> Max Calories:
+                  <select
+                    name="calories"
+                    value={filters.calories}
+                    onChange={handleFilterChange}
+                    className="filter-select"
+                  >
+                    <option value="0">Any</option>
+                    <option value="300">≤ 300 kcal</option>
+                    <option value="500">≤ 500 kcal</option>
+                    <option value="800">≤ 800 kcal</option>
+                  </select>
+                </label>
+              </div>
+
+              <button className="reset-filters" onClick={resetFilters}>
+                Reset All Filters
+              </button>
+            </div>
+          )}
+
           <div className="category-grid">
             {filteredCategories.length > 0 ? (
               filteredCategories.map((category, index) => (
@@ -89,7 +209,10 @@ function RecipesPage() {
             ? `${selectedCategory} Recipes`
             : "Featured Recipes"}
         </h2>
-        <RecipesPageList selectedCategory={selectedCategory} />
+        <RecipesPageList
+          selectedCategory={selectedCategory}
+          filters={filters}
+        />
       </section>
     </div>
   );
