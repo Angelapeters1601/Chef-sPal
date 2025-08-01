@@ -3,13 +3,22 @@ import RecipesList from "./RecipesListCard";
 import Loader from "../ui/Loader";
 import ErrorMessage from "../ui/ErrorMessage";
 import { useRecipeContext } from "../context/RecipeContext";
+import { FaHeart } from "react-icons/fa";
 import "./RecipesListCard.css";
 
 function RecipesPageList({ selectedCategory }) {
   const { isLoading, error, fetchRecipesByDishType } = useRecipeContext();
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [favorites, setFavorites] = useState([]);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const recipesPerPage = 10;
+
+  useEffect(() => {
+    const savedFavorites =
+      JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
+    setFavorites(savedFavorites);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +34,6 @@ function RecipesPageList({ selectedCategory }) {
         "Side Dishes",
       ];
 
-      // If a category is selected, only fetch that category
       if (selectedCategory) {
         dishTypes = [selectedCategory];
       }
@@ -36,12 +44,32 @@ function RecipesPageList({ selectedCategory }) {
     };
 
     fetchData();
-  }, [selectedCategory]);
+  }, [selectedCategory, fetchRecipesByDishType]);
+
+  const toggleFavorite = (recipeId) => {
+    setFavorites((prev) => {
+      let newFavorites;
+      if (prev.includes(recipeId)) {
+        newFavorites = prev.filter((id) => id !== recipeId);
+      } else {
+        newFavorites = [...prev, recipeId];
+      }
+      localStorage.setItem("favoriteRecipes", JSON.stringify(newFavorites));
+      return newFavorites;
+    });
+  };
+
+  const filteredRecipes = showFavoritesOnly
+    ? recipes.filter((recipe) => favorites.includes(recipe.id))
+    : recipes;
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
-  const totalPages = Math.ceil(recipes.length / recipesPerPage);
+  const currentRecipes = filteredRecipes.slice(
+    indexOfFirstRecipe,
+    indexOfLastRecipe
+  );
+  const totalPages = Math.ceil(filteredRecipes.length / recipesPerPage);
 
   if (isLoading) return <Loader />;
   if (error) return <ErrorMessage message={error} />;
@@ -50,8 +78,39 @@ function RecipesPageList({ selectedCategory }) {
     <div className="recipes-list-container">
       {!isLoading && !error && (
         <>
-          {recipes.length === 0 ? (
-            <p className="no-recipes">No recipes found!</p>
+          <div
+            className="filters-container"
+            style={{
+              marginBottom: "1rem",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <button
+              onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+              style={{
+                padding: "0.5rem 1rem",
+                background: showFavoritesOnly ? "#4a6f28" : "#f0f0f0",
+                color: showFavoritesOnly ? "white" : "#333",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+              }}
+            >
+              <FaHeart color={showFavoritesOnly ? "white" : "#e74c3c"} />
+              {showFavoritesOnly ? "Show All Recipes" : "Show Favorites Only"}
+            </button>
+          </div>
+
+          {filteredRecipes.length === 0 ? (
+            <p className="no-recipes">
+              {showFavoritesOnly
+                ? "You have no favorite recipes yet!"
+                : "No recipes found!"}
+            </p>
           ) : (
             <>
               <div className="recipes-grid">
@@ -64,8 +123,6 @@ function RecipesPageList({ selectedCategory }) {
                     dishType={r.dishType}
                     occasion={r.occasion}
                     summary={r.summary}
-                    ingridients={r.ingridients}
-                    steps={r.steps}
                     cookingTime={r.cookingTime}
                     vegan={r.vegan}
                     glutenFree={r.glutenFree}
@@ -74,6 +131,8 @@ function RecipesPageList({ selectedCategory }) {
                     tags={r.tags}
                     ratings={r.ratings}
                     servings={r.servings}
+                    isFavorite={favorites.includes(r.id)}
+                    onFavoriteToggle={toggleFavorite}
                   />
                 ))}
               </div>
