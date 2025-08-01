@@ -9,6 +9,7 @@ import {
   FaFire,
   FaClock,
   FaFilter,
+  FaHeart,
 } from "react-icons/fa";
 
 function RecipesPage() {
@@ -21,6 +22,7 @@ function RecipesPage() {
     cookingTime: 0,
     difficulty: "",
     calories: 0,
+    showFavoritesOnly: false,
   });
 
   const recipeCategories = [
@@ -44,6 +46,13 @@ function RecipesPage() {
     }));
   };
 
+  const toggleFavoritesFilter = () => {
+    setFilters((prev) => ({
+      ...prev,
+      showFavoritesOnly: !prev.showFavoritesOnly,
+    }));
+  };
+
   const resetFilters = () => {
     setFilters({
       vegan: false,
@@ -51,6 +60,7 @@ function RecipesPage() {
       cookingTime: 0,
       difficulty: "",
       calories: 0,
+      showFavoritesOnly: false,
     });
   };
 
@@ -88,12 +98,25 @@ function RecipesPage() {
           </h2>
           <div className="search-filter-container">
             <Search onSearch={setSearchTerm} />
-            <button
-              className={`filter-toggle ${showFilters ? "active" : ""}`}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <FaFilter /> {showFilters ? "Hide Filters" : "Show Filters"}
-            </button>
+            <div className="filter-controls">
+              <button
+                className={`favorites-filter ${
+                  filters.showFavoritesOnly ? "active" : ""
+                }`}
+                onClick={toggleFavoritesFilter}
+              >
+                <FaHeart />{" "}
+                {filters.showFavoritesOnly
+                  ? "Showing Favorites"
+                  : "Show Favorites"}
+              </button>
+              <button
+                className={`filter-toggle ${showFilters ? "active" : ""}`}
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                <FaFilter /> {showFilters ? "Hide Filters" : "Show Filters"}
+              </button>
+            </div>
           </div>
 
           {showFilters && (

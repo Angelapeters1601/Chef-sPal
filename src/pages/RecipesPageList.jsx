@@ -1,68 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useRecipeContext } from "../context/RecipeContext";
 import RecipesList from "./RecipesListCard";
 import Loader from "../ui/Loader";
 import ErrorMessage from "../ui/ErrorMessage";
-import { useRecipeContext } from "../context/RecipeContext";
-import { FaHeart } from "react-icons/fa";
 import "./RecipesListCard.css";
 
-function RecipesPageList({ selectedCategory }) {
-  const { isLoading, error, fetchRecipesByDishType } = useRecipeContext();
+function RecipesPageList({ selectedCategory, filters }) {
+  const {
+    isLoading,
+    error,
+    fetchRecipesByDishType,
+    favorites,
+    toggleFavorite,
+  } = useRecipeContext();
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [favorites, setFavorites] = useState([]);
-  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const recipesPerPage = 10;
 
-  useEffect(() => {
-    const savedFavorites =
-      JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
-    setFavorites(savedFavorites);
-  }, []);
+  const fetchData = useCallback(async () => {
+    let dishTypes = [
+      "Dinners",
+      "Lunches",
+      "Breakfasts",
+      "Appetizers",
+      "Pastries",
+      "Herbs & Spices",
+      "Snacks",
+      "Desserts",
+      "Side Dishes",
+    ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let dishTypes = [
-        "Dinners",
-        "Lunches",
-        "Breakfasts",
-        "Appetizers",
-        "Pastries",
-        "Herbs & Spices",
-        "Snacks",
-        "Desserts",
-        "Side Dishes",
-      ];
+    if (selectedCategory) {
+      dishTypes = [selectedCategory];
+    }
 
-      if (selectedCategory) {
-        dishTypes = [selectedCategory];
-      }
-
-      const data = await fetchRecipesByDishType(dishTypes);
-      setRecipes(data);
-      setCurrentPage(1);
-    };
-
-    fetchData();
+    const data = await fetchRecipesByDishType(dishTypes);
+    setRecipes(data || []);
+    setCurrentPage(1);
   }, [selectedCategory, fetchRecipesByDishType]);
 
-  const toggleFavorite = (recipeId) => {
-    setFavorites((prev) => {
-      let newFavorites;
-      if (prev.includes(recipeId)) {
-        newFavorites = prev.filter((id) => id !== recipeId);
-      } else {
-        newFavorites = [...prev, recipeId];
-      }
-      localStorage.setItem("favoriteRecipes", JSON.stringify(newFavorites));
-      return newFavorites;
-    });
-  };
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
-  const filteredRecipes = showFavoritesOnly
-    ? recipes.filter((recipe) => favorites.includes(recipe.id))
-    : recipes;
+  const applyFilters = useCallback(
+    (recipe) => {
+      if (filters.vegan && !recipe.vegan) return false;
+      if (filters.glutenFree && !recipe.glutenFree) return false;
+      if (filters.cookingTime > 0 && recipe.cookingTime > filters.cookingTime)
+        return false;
+      if (
+        filters.difficulty &&
+        recipe.difficulty.toLowerCase() !== filters.difficulty.toLowerCase()
+      )
+        return false;
 
+      if (filters.calories > 0 && recipe.calories > filters.calories)
+        return false;
+      if (filters.showFavoritesOnly && !favorites.includes(recipe.id))
+        return false;
+      return true;
+    },
+    [filters, favorites]
+  );
+
+  const filteredRecipes = recipes.filter(applyFilters);
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   const currentRecipes = filteredRecipes.slice(
@@ -78,48 +80,23 @@ function RecipesPageList({ selectedCategory }) {
     <div className="recipes-list-container">
       {!isLoading && !error && (
         <>
-          <div
-            className="filters-container"
-            style={{
-              marginBottom: "1rem",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <button
-              onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-              style={{
-                padding: "0.5rem 1rem",
-                background: showFavoritesOnly ? "#4a6f28" : "#f0f0f0",
-                color: showFavoritesOnly ? "white" : "#333",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <FaHeart color={showFavoritesOnly ? "white" : "#e74c3c"} />
-              {showFavoritesOnly ? "Show All Recipes" : "Show Favorites Only"}
-            </button>
-          </div>
-
           {filteredRecipes.length === 0 ? (
             <p className="no-recipes">
-              {showFavoritesOnly
+              {filters.showFavoritesOnly
                 ? "You have no favorite recipes yet!"
-                : "No recipes found!"}
+                : selectedCategory
+                ? `No ${selectedCategory.toLowerCase()} recipes match your filters`
+                : "No recipes match your filters"}
             </p>
           ) : (
             <>
               <div className="recipes-grid">
                 {currentRecipes.map((r) => (
                   <RecipesList
+                    key={r.id}
                     id={r.id}
                     title={r.title}
                     image={r.image}
-                    key={r.id}
                     dishType={r.dishType}
                     occasion={r.occasion}
                     summary={r.summary}
